@@ -7,3 +7,8 @@ console.log(currentTime);
 
 const person: string = "Martin"
 const count: number = 100;
+
+
+// Architectural pattern MVC, Dependency Injection, MVP
+
+// Design pattern: Middleware, Decotar
