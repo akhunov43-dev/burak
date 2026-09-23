@@ -1,4 +1,4 @@
-console.log("EXECUTED!");
+/* console.log("EXECUTED!");
 
 import moment from "moment";
 
@@ -7,8 +7,16 @@ console.log(currentTime);
 
 const person: string = "Martin"
 const count: number = 100;
+*/
 
 
 // Architectural pattern MVC, Dependency Injection, MVP
 
 // Design pattern: Middleware, Decotar
+
+import dotenv from 'dotenv'
+dotenv.config();
+
+console.log("PORT:", process.env.PORT);
+
+console.log("MONGO_URL:", process.env.PORT);
