@@ -18,3 +18,19 @@ console.log(getSquareNumbers([3, 6, 10]));
 
 
 // [number: 3, square: 9}, {number: 6, square: 36}, {number: 10, square: 10]
+
+
+/* N-TASK
+
+Shunday function yozing, u string qabul qilsin va string palindrom yani togri oqilganda ham, orqasidan oqilganda ham bir hil oqiladigan soz ekanligini aniqlab boolean qiymat qaytarsin. MASALAN: palindromCheck("dad") return true; palindromCheck("son") return false. */
+
+function palindromCheck(str: string): boolean {
+  const reversed: string = str.split("").reverse().join("");
+  return str === reversed;
+}
+
+console.log(palindromCheck("level"));   // true
+console.log(palindromCheck("madam"));   // true
+console.log(palindromCheck("hello"));   // false
+console.log(palindromCheck("world"));   // false
+console.log(palindromCheck("noon"));    // true
