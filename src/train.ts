@@ -34,3 +34,15 @@ console.log(palindromCheck("madam"));   // true
 console.log(palindromCheck("hello"));   // false
 console.log(palindromCheck("world"));   // false
 console.log(palindromCheck("noon"));    // true
+
+
+/* Project standards:
+ - Logging standards
+ - Naming standards
+   function, method, variable  => CAMEL          goHome
+   class  =>  PASCAL                             MemberService
+   folder => KEBAB                               
+   css =>  SNAKE                                 button_style
+    
+   -Error handling
+   */
