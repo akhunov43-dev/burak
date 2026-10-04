@@ -49,12 +49,16 @@ console.log(palindromCheck("noon"));    // true
    */
 
    /*
-   Traditional API
+   Traditional API 
    Rest API
    GraphQl API
    ...
    */
 
+/* 
+    Traditional FD => BSSR (adminka) => EJS
+
+     Modern FD =>  SPA (user's application) => React / Vue / Angular
 
    /* 
    O-TASK
