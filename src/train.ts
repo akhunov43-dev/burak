@@ -90,3 +90,17 @@ function objectToArray(obj: Record<string, number>): [string, number][] {
 }
 
 console.log(objectToArray({ a: 35, b: 50, c: 15})); // [["a", 35], ["b", 50], ["c", 15]]
+
+
+/* Q-TASK
+
+Shunday function yozing, u 2 ta parametrgga ega bolib birinchisi object, ikkinchisi string. Agar string parametr objectni propertysi bolsa true bolmasa false qaytarsin. MASALAN: hasProperty({name: "BMW", model: "M3"}, "model") return true; hasProperty({name: "BMW", model: "M3"}, "year") return false.
+*/
+function hasProperty(obj: Record<string, unknown>, key: string): boolean {
+  return Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+console.log(hasProperty({ name: "apple", color: "Red" }, "color"));   // true
+console.log(hasProperty({ name: "apple", color: "Red" }, "price"));   // false
+console.log(hasProperty({ username: "johny", age: 25 }, "age"));      //  true
+console.log(hasProperty({ username: "johny", age: 25 }, "email"));    // false
