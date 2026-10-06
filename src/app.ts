@@ -1,3 +1,6 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express from "express";
 import path from "path";
 import router from "./router";
@@ -10,7 +13,7 @@ import ConnectMongoDB from "connect-mongodb-session";
 
 const MongoDBStore = ConnectMongoDB(session);
 const store = new MongoDBStore({
-    uri: String(process.env.MONGO_URI), 
+    uri: String(process.env.MONGO_URL), 
     collection: "sessions",
 });
 
