@@ -7,6 +7,7 @@ import { MORGAN_FORMAT } from "./libs/config";
 
 import session from "express-session";
 import ConnectMongoDB from "connect-mongodb-session";
+import { T } from "./libs/types/common";
 
 const MongoDBStore = ConnectMongoDB(session);
 const store = new MongoDBStore({
@@ -27,10 +28,15 @@ app.use
 (session({
     secret: String(process.env.SESSION_SECRET), 
     cookie: {maxAge: 1000 * 3600 * 6}, // 6 hours
-    store: store,
-    resave: true,   // false: do not create session until something stored
-    saveUninitialized: true,    
-}));
+    store: store,  // MongoDBStore
+    resave: true,   // false: do not create session until  // true: create session even if nothing stored
+    saveUninitialized: true,   
+}));                          
+
+app.use(function(req, res, next) {
+    const sessionInstance = req.session as T
+    res.locals.member = sessionInstance.member;
+next(); });
 
 
 /** 3-VIEWS  **/

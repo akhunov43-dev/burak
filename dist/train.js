@@ -1,0 +1,91 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+console.log("Hello World!");
+function getSquareNumbers(arr) {
+    return arr.map(num => ({ number: num, square: num * num }));
+}
+console.log(getSquareNumbers([3, 6, 10]));
+// [number: 3, square: 9}, {number: 6, square: 36}, {number: 10, square: 10]
+/* N-TASK
+
+Shunday function yozing, u string qabul qilsin va string palindrom yani togri oqilganda ham, orqasidan oqilganda ham bir hil oqiladigan soz ekanligini aniqlab boolean qiymat qaytarsin. MASALAN: palindromCheck("dad") return true; palindromCheck("son") return false. */
+function palindromCheck(str) {
+    const reversed = str.split("").reverse().join("");
+    return str === reversed;
+}
+console.log(palindromCheck("level")); // true
+console.log(palindromCheck("madam")); // true
+console.log(palindromCheck("hello")); // false
+console.log(palindromCheck("world")); // false
+console.log(palindromCheck("noon")); // true
+/* Project standards:
+ - Logging standards
+ - Naming standards
+   function, method, variable  => CAMEL          goHome
+   class  =>  PASCAL                             MemberService
+   folder, file => KEBAB
+   css =>  SNAKE                                 button_style
+    
+   -Error handling
+
+   */
+/*
+Traditional API
+Rest API
+GraphQl API
+...
+*/
+/*
+    Traditional FD => BSSR (adminka) => EJS
+
+     Modern FD =>  SPA (user's application) => React / Vue / Angular
+/*
+/*
+     request join
+     self destroy
+ */
+/*
+   O-TASK
+
+Shunday function yozing, u har xil valuelardan iborat array qabul qilsin va array ichidagi sonlar yigindisini
+hisoblab chiqqan javobni qaytarsin. MASALAN: calculateSumOfNumbers([10, "10", {son: 10}, true, 35]) return 45.
+*/
+function calculateSumOfNumbers(arr) {
+    let sum = 0;
+    for (let i = 0; i < arr.length; i++) {
+        if (typeof arr[i] === "number") {
+            sum += arr[i];
+        }
+    }
+    return sum;
+}
+console.log(calculateSumOfNumbers([39, "39", { son: 39 }, true, 35])); // 74
+/* P-TASK
+
+Shunday function yozing, u object qabul qilsin va arrayni object arrayga otkazib arrayni qaytarsin. MASALAN: objectToArray({a: 10, b: 20}) return [["a", 10], ["b", 20]].
+*/
+function objectToArray(obj) {
+    return Object.entries(obj);
+}
+console.log(objectToArray({ a: 35, b: 50, c: 15 })); // [["a", 35], ["b", 50], ["c", 15]]
+/* Q-TASK
+
+Shunday function yozing, u 2 ta parametrgga ega bolib birinchisi object, ikkinchisi string. Agar string parametr objectni propertysi bolsa true bolmasa false qaytarsin. MASALAN: hasProperty({name: "BMW", model: "M3"}, "model") return true; hasProperty({name: "BMW", model: "M3"}, "year") return false.
+*/
+function hasProperty(obj, key) {
+    return Object.prototype.hasOwnProperty.call(obj, key);
+}
+console.log(hasProperty({ name: "apple", color: "Red" }, "color")); // true
+console.log(hasProperty({ name: "apple", color: "Red" }, "price")); // false
+console.log(hasProperty({ username: "johny", age: 25 }, "age")); //  true
+console.log(hasProperty({ username: "johny", age: 25 }, "email")); // false
+/* R-TASK
+
+Shunday function yozing, u string parametrga ega bolsin. String "1+2" holatda pass qilinganda string ichidagi sonlar yigindisini number holatda qaytarsin. MASALAN: calculate("1+3") return 4.
+*/
+function calculate(str) {
+    const [a, b] = str.split("+").map(Number);
+    return a + b;
+}
+console.log(calculate("6+7")); // 13
+console.log(calculate("7678+7687")); // 15365
