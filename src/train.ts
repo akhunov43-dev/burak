@@ -1,4 +1,4 @@
-console.log("Hello World!")
+console.log("Hello World!");
 
 /* M-TASK
 
@@ -11,14 +11,12 @@ interface SquareResult {
 }
 
 function getSquareNumbers(arr: number[]): SquareResult[] {
-  return arr.map(num => ({ number: num, square: num * num }));
+  return arr.map((num) => ({ number: num, square: num * num }));
 }
 
 console.log(getSquareNumbers([3, 6, 10]));
 
-
 // [number: 3, square: 9}, {number: 6, square: 36}, {number: 10, square: 10]
-
 
 /* N-TASK
 
@@ -29,12 +27,11 @@ function palindromCheck(str: string): boolean {
   return str === reversed;
 }
 
-console.log(palindromCheck("level"));   // true
-console.log(palindromCheck("madam"));   // true
-console.log(palindromCheck("hello"));   // false
-console.log(palindromCheck("world"));   // false
-console.log(palindromCheck("noon"));    // true
-
+console.log(palindromCheck("level")); // true
+console.log(palindromCheck("madam")); // true
+console.log(palindromCheck("hello")); // false
+console.log(palindromCheck("world")); // false
+console.log(palindromCheck("noon")); // true
 
 /* Project standards:
  - Logging standards
@@ -48,22 +45,33 @@ console.log(palindromCheck("noon"));    // true
 
    */
 
-   /*
+/*    Request:
    Traditional API 
    Rest API
    GraphQl API
    ...
    */
 
-/* 
+/*      Frontend development:
     Traditional FD => BSSR (adminka) => EJS
 
      Modern FD =>  SPA (user's application) => React / Vue / Angular
 /* 
 /*  
+      Cookies:
      request join
      self destroy
- */ 
+ */
+/* 
+    VALIDATIONS:
+   Fronted validations 
+   Pipe validations
+   Backend Validations
+   Database validations
+
+*/
+
+
 
 /*
    O-TASK
@@ -84,7 +92,7 @@ function calculateSumOfNumbers(arr: unknown[]): number {
   return sum;
 }
 
-console.log(calculateSumOfNumbers([39, "39", { son: 39 }, true, 35]));            // 74
+console.log(calculateSumOfNumbers([39, "39", { son: 39 }, true, 35])); // 74
 
 /* P-TASK
 
@@ -95,8 +103,7 @@ function objectToArray(obj: Record<string, number>): [string, number][] {
   return Object.entries(obj);
 }
 
-console.log(objectToArray({ a: 35, b: 50, c: 15})); // [["a", 35], ["b", 50], ["c", 15]]
-
+console.log(objectToArray({ a: 35, b: 50, c: 15 })); // [["a", 35], ["b", 50], ["c", 15]]
 
 /* Q-TASK
 
@@ -106,10 +113,10 @@ function hasProperty(obj: Record<string, unknown>, key: string): boolean {
   return Object.prototype.hasOwnProperty.call(obj, key);
 }
 
-console.log(hasProperty({ name: "apple", color: "Red" }, "color"));   // true
-console.log(hasProperty({ name: "apple", color: "Red" }, "price"));   // false
-console.log(hasProperty({ username: "johny", age: 25 }, "age"));      //  true
-console.log(hasProperty({ username: "johny", age: 25 }, "email"));    // false
+console.log(hasProperty({ name: "apple", color: "Red" }, "color")); // true
+console.log(hasProperty({ name: "apple", color: "Red" }, "price")); // false
+console.log(hasProperty({ username: "johny", age: 25 }, "age")); //  true
+console.log(hasProperty({ username: "johny", age: 25 }, "email")); // false
 
 /* R-TASK
 
@@ -121,8 +128,8 @@ function calculate(str: string): number {
   return a + b;
 }
 
-console.log(calculate("6+7"));         // 13
-console.log(calculate("7678+7687"));   // 15365
+console.log(calculate("6+7")); // 13
+console.log(calculate("7678+7687")); // 15365
 
 /*
 S-TASK
