@@ -123,3 +123,20 @@ function calculate(str: string): number {
 
 console.log(calculate("6+7"));         // 13
 console.log(calculate("7678+7687"));   // 15365
+
+/*
+S-TASK
+
+Shunday function yozing, u numberlardan tashkil topgan array qabul qilsin va osha numberlar
+orasidagi tushib qolgan sonni topib uni return qilsin. MASALAN: missingNumber([3, 0, 1]) return 2.
+*/
+
+function missingNumber(arr: number[]): number {
+  const n = arr.length;
+  const expectedSum = (n * (n + 1)) / 2;
+  const actualSum = arr.reduce((sum, num) => sum + num, 0);
+  return expectedSum - actualSum;
+}
+
+console.log(missingNumber([3, 5, 2, 0, 1])); // 4
+console.log(missingNumber([0, 1, 2, 3, 4, 5, 6, 8, 9])); // 7
