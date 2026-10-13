@@ -1,13 +1,11 @@
 import MemberModel from "../schema/Member.model";
-import { LoginInput, Member, MemberInput } from "../libs/types/member";
+import { LoginInput, Member, MemberInput, MemberUpdateInput } from "../libs/types/member";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { MemberType } from "../libs/enums/member.enum";
 import * as bcrypt from "bcryptjs";
+import { shapeIntoMongooseObjectId } from "../libs/config";
 
 class MemberService {
-  processSignup(newMember: MemberInput) {
-    throw new Error("Method not implemented.");
-  }
     private readonly memberModel;
 
     constructor() {
@@ -56,26 +54,24 @@ public async login(input: LoginInput): Promise<Member> {
 
      /** SSR */
 
-    // public async processSignup(input: MemberInput): Promise<Member> 
-    // // {
-    //     const exist = await this.memberModel
-    //      .findOne({ memberType: MemberType.RESTAURANT })
-    //      .exec();
-    //     if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+    public async processSignup(input: MemberInput): Promise<Member> {
+    const exist = await this.memberModel
+        .findOne({ memberType: MemberType.RESTAURANT })
+        .exec();
+    if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
 
-    // const salt = await bcrypt.genSalt();
-    // input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
-    
-     
+    const salt = await bcrypt.genSalt();
+    input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
 
-//     try {
-//         const result = await this.memberModel.create(input);
-//         result.memberPassword = "";
-//         return result;
-//     } catch (err) {
-//         throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
-//     }
-// }
+    try {
+        const result = await this.memberModel.create(input);
+        result.memberPassword = "";
+        return result;
+    } catch (err) {
+        throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+    }
+}
+
 
 
 public async processLogin(input: LoginInput): Promise<Member> {
@@ -111,14 +107,14 @@ public async getUsers(): Promise<Member[]> {
 
   return result;
 }
-}
-// public async updateChosenUser(input: MemberUpdateInput): Promise<Member> {
-//     input._id = shapeIntoMongooseObjectId(input._id);
-//     const result = await this.memberModel
-//       .findByIdAndUpdate({ _id: input._id }, input, { new: true })
-//       .exec();
-//     if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
-
-//     return result;
-
+    
+    public async updateChosenUser(input: MemberUpdateInput): Promise<Member[]> {
+        input._id = shapeIntoMongooseObjectId(input._id);
+        const result = await this.memberModel
+        .findByIdAndUpdate({ _id: input._id }, input, { new: true })
+        .exec();
+        if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
+        return result;
+  }
+ } 
 export default MemberService;
