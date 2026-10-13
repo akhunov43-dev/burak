@@ -183,3 +183,22 @@ function mergeSortedArrays(arr1: number[], arr2: number[]): number[] {
 }
 
 console.log(mergeSortedArrays([5, 10], [1, 7, 12]));        // [1, 5, 7, 10, 12]
+
+/* U-TASK
+
+Shunday function yozing, uni number parametri bolsin va 0 dan berilgan parametrgacha bolgan oraliqdagi 
+faqat toq sonlar nechtaligini return qilsin. MASALAN: sumOdds(9) return 4; sumOdds(11) return 5.
+*/
+function sumOdds(num: number): number {
+  let count = 0;
+
+  for (let i = 1; i < num; i += 2) {
+    count++;
+  }
+
+  return count;
+}
+
+console.log(sumOdds(10)); // 5
+console.log(sumOdds(5));  // 2
+console.log(sumOdds(2));  // 1
