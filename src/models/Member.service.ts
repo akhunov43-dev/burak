@@ -5,6 +5,9 @@ import { MemberType } from "../libs/enums/member.enum";
 import * as bcrypt from "bcryptjs";
 
 class MemberService {
+  processSignup(newMember: MemberInput) {
+    throw new Error("Method not implemented.");
+  }
     private readonly memberModel;
 
     constructor() {
@@ -53,33 +56,36 @@ public async login(input: LoginInput): Promise<Member> {
 
      /** SSR */
 
-    public async processSignup(input: MemberInput): Promise<Member> {
-     const exist = await this.memberModel
-         .findOne({ memberType: MemberType.RESTAURANT })
-         .exec();
-        if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+    // public async processSignup(input: MemberInput): Promise<Member> 
+    // // {
+    //     const exist = await this.memberModel
+    //      .findOne({ memberType: MemberType.RESTAURANT })
+    //      .exec();
+    //     if (exist) throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
 
-    const salt = await bcrypt.genSalt();
-    input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
+    // const salt = await bcrypt.genSalt();
+    // input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
     
+     
 
-    try {
-        const result = await this.memberModel.create(input);
-        result.memberPassword = "";
-        return result;
-    } catch (err) {
-        throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
-    }
-}
+//     try {
+//         const result = await this.memberModel.create(input);
+//         result.memberPassword = "";
+//         return result;
+//     } catch (err) {
+//         throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED);
+//     }
+// }
 
 
 public async processLogin(input: LoginInput): Promise<Member> {
-    const member = await this.memberModel
-        .findOne(
-            { memberNick: input.memberNick },
-            { memberNick: 1, memberPassword: 1 }
-            )
-        .exec();
+  const member = await this.memberModel
+    .findOne(
+      { memberNick: input.memberNick },
+      { memberNick: 1, memberPassword: 1 }
+    )
+    .exec();
+
         if(!member) throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK);
 
         const isMatch = await bcrypt.compare(
@@ -93,7 +99,26 @@ public async processLogin(input: LoginInput): Promise<Member> {
         }
 
         return await this.memberModel.findById(member._id).exec();
+}; 
+
+public async getUsers(): Promise<Member[]> {
+  const result = await this.memberModel
+    .find({ MemberType: MemberType.USER })
+    .lean<Member[]>()
+    .exec();
+
+  if (!result.length) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+
+  return result;
 }
 }
+// public async updateChosenUser(input: MemberUpdateInput): Promise<Member> {
+//     input._id = shapeIntoMongooseObjectId(input._id);
+//     const result = await this.memberModel
+//       .findByIdAndUpdate({ _id: input._id }, input, { new: true })
+//       .exec();
+//     if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
+
+//     return result;
 
 export default MemberService;
