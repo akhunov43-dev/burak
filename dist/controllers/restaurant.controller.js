@@ -65,14 +65,18 @@ restaurantController.getLogin = (req, res) => {
 restaurantController.processSignup = async (req, res) => {
     try {
         console.log("processSignup");
+        console.log("req.body:", req.body);
+        const file = req.file;
+        if (!file)
+            throw new Errors_1.default(Errors_1.HttpCode.BAD_REQUEST, Errors_1.Message.SOMETHING_WENT_WRONG);
         const newMember = req.body;
+        newMember.memberImage = file?.path;
         newMember.memberType = member_enum_1.MemberType.RESTAURANT;
         const result = await memberService.processSignup(newMember);
         req.session.member = result;
         req.session.save(function () {
-            res.send(result);
+            res.redirect("/admin/product/all");
         });
-        res.send(result);
     }
     catch (err) {
         console.log("Error, getSignup:", err);
@@ -85,11 +89,11 @@ restaurantController.processLogin = async (req, res) => {
         console.log("processLogin");
         console.log("body:", req.body);
         const input = req.body;
-        const memberService = new Member_service_1.default();
+        //const memberService = new MemberService();
         const result = await memberService.processLogin(input);
         req.session.member = result;
         req.session.save(function () {
-            res.send(result);
+            res.redirect("/admin/product/all");
         });
     }
     catch (err) {
@@ -108,6 +112,32 @@ restaurantController.logout = async (req, res) => {
     catch (err) {
         console.log("Error, logout:", err);
         res.redirect("/admin/");
+    }
+};
+restaurantController.getUsers = async (req, res) => {
+    try {
+        console.log("getUsers");
+        const result = await memberService.getUsers();
+        console.log("result:", result);
+        res.render("users", { users: result });
+    }
+    catch (err) {
+        console.log("Error, getUsers:", err);
+        res.redirect("/admin/login");
+    }
+};
+restaurantController.updateChosenUser = async (req, res) => {
+    try {
+        console.log("updateChosenUser");
+        const result = await memberService.updateChosenUser(req.body);
+        res.status(Errors_1.HttpCode.OK).json({ data: result });
+    }
+    catch (err) {
+        console.log("Error, updateChosenUser:", err);
+        if (err instanceof Errors_1.default)
+            res.status(err.code).json(err);
+        else
+            res.status(Errors_1.default.standard.code).json(Errors_1.default.standard);
     }
 };
 restaurantController.checkAuthSession = async (req, res) => {
@@ -130,7 +160,7 @@ restaurantController.verifyRestaurant = (req, res, next) => {
     }
     else {
         const message = Errors_1.Message.NOT_AUTHENTICATED;
-        res.send(`<script>alert('${message}'): window,location.replace('/admin/login')</script>`);
+        res.send(`<script> alert("${message}"); window.location.replace('/admin/login'); </script>`);
     }
 };
 exports.default = restaurantController;

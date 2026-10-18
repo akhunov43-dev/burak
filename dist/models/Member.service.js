@@ -30,6 +30,7 @@ const Member_model_1 = __importDefault(require("../schema/Member.model"));
 const Errors_1 = __importStar(require("../libs/Errors"));
 const member_enum_1 = require("../libs/enums/member.enum");
 const bcrypt = __importStar(require("bcryptjs"));
+const config_1 = require("../libs/config");
 class MemberService {
     constructor() {
         this.memberModel = Member_model_1.default;
@@ -92,6 +93,25 @@ class MemberService {
             throw new Errors_1.default(Errors_1.HttpCode.UNAUTHORIZED, Errors_1.Message.WRONG_PASSWORD);
         }
         return await this.memberModel.findById(member._id).exec();
+    }
+    ;
+    async getUsers() {
+        const result = await this.memberModel
+            .find({ MemberType: member_enum_1.MemberType.USER })
+            .lean()
+            .exec();
+        if (!result.length)
+            throw new Errors_1.default(Errors_1.HttpCode.NOT_FOUND, Errors_1.Message.NO_DATA_FOUND);
+        return result;
+    }
+    async updateChosenUser(input) {
+        input._id = (0, config_1.shapeIntoMongooseObjectId)(input._id);
+        const result = await this.memberModel
+            .findByIdAndUpdate({ _id: input._id }, input, { new: true })
+            .exec();
+        if (!result)
+            throw new Errors_1.default(Errors_1.HttpCode.NOT_MODIFIED, Errors_1.Message.UPDATE_FAILED);
+        return result;
     }
 }
 exports.default = MemberService;

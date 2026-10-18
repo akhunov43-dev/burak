@@ -31,6 +31,11 @@ app.use((0, express_session_1.default)({
     resave: true,
     saveUninitialized: true,
 }));
+app.use(function (req, res, next) {
+    const sessionInstance = req.session;
+    res.locals.member = sessionInstance.member;
+    next();
+});
 /** 3-VIEWS  **/
 app.set("views", path_1.default.join(__dirname, "views"));
 app.set("view engine", "ejs");

@@ -44,6 +44,8 @@
               </tr>
             </thead>
             <!--  LOOP PRODUCTS: START  -->
+
+          <% products.map(function(value, key) { %> 
             <tbody style="background: white">
               <td>1</td>
               <td>Steak</td>
@@ -59,6 +61,8 @@
                 </select>
               </td>
             </tbody>
+          <% }) %>
+
             <!--  LOOP PRODUCTS: END  -->
           </table>
           <div

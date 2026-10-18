@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 console.log("Hello World!");
 function getSquareNumbers(arr) {
-    return arr.map(num => ({ number: num, square: num * num }));
+    return arr.map((num) => ({ number: num, square: num * num }));
 }
 console.log(getSquareNumbers([3, 6, 10]));
 // [number: 3, square: 9}, {number: 6, square: 36}, {number: 10, square: 10]
@@ -29,21 +29,30 @@ console.log(palindromCheck("noon")); // true
    -Error handling
 
    */
-/*
-Traditional API
-Rest API
-GraphQl API
-...
-*/
-/*
+/*    Request:
+   Traditional API
+   Rest API
+   GraphQl API
+   ...
+   */
+/*      Frontend development:
     Traditional FD => BSSR (adminka) => EJS
 
      Modern FD =>  SPA (user's application) => React / Vue / Angular
 /*
 /*
+      Cookies:
      request join
      self destroy
  */
+/*
+    VALIDATIONS:
+   Fronted validations
+   Pipe validations
+   Backend Validations
+   Database validations
+
+*/
 /*
    O-TASK
 
@@ -89,3 +98,75 @@ function calculate(str) {
 }
 console.log(calculate("6+7")); // 13
 console.log(calculate("7678+7687")); // 15365
+/*
+S-TASK
+
+Shunday function yozing, u numberlardan tashkil topgan array qabul qilsin va osha numberlar
+orasidagi tushib qolgan sonni topib uni return qilsin. MASALAN: missingNumber([3, 0, 1]) return 2.
+*/
+function missingNumber(arr) {
+    const n = arr.length;
+    const expectedSum = (n * (n + 1)) / 2;
+    const actualSum = arr.reduce((sum, num) => sum + num, 0);
+    return expectedSum - actualSum;
+}
+console.log(missingNumber([3, 5, 2, 0, 1])); // 4
+console.log(missingNumber([0, 1, 2, 3, 4, 5, 6, 8, 9])); // 7
+/*
+T-TASK
+Shunday function yozing, u sonlardan tashkil topgan 2 ta array qabul qilsin va ikkala arraydagi sonlarni
+tartiblab bir arrayda qaytarsin. MASALAN: mergeSortedArrays([0,3,4,31], [4,6,30]) return [0,3,4,4,6,30,31].
+ */
+function mergeSortedArrays(arr1, arr2) {
+    const result = [];
+    let i = 0;
+    let j = 0;
+    while (i < arr1.length && j < arr2.length) {
+        if (arr1[i] <= arr2[j]) {
+            result.push(arr1[i]);
+            i++;
+        }
+        else {
+            result.push(arr2[j]);
+            j++;
+        }
+    }
+    while (i < arr1.length) {
+        result.push(arr1[i]);
+        i++;
+    }
+    while (j < arr2.length) {
+        result.push(arr2[j]);
+        j++;
+    }
+    return result;
+}
+console.log(mergeSortedArrays([5, 10], [1, 7, 12])); // [1, 5, 7, 10, 12]
+/* U-TASK
+
+Shunday function yozing, uni number parametri bolsin va 0 dan berilgan parametrgacha bolgan oraliqdagi
+faqat toq sonlar nechtaligini return qilsin. MASALAN: sumOdds(9) return 4; sumOdds(11) return 5.
+*/
+function sumOdds(num) {
+    let count = 0;
+    for (let i = 1; i < num; i += 2) {
+        count++;
+    }
+    return count;
+}
+console.log(sumOdds(10)); // 5
+console.log(sumOdds(5)); // 2
+console.log(sumOdds(2)); // 1
+/* V-TASK
+
+Shunday function yozing, uni string parametri bolsin va stringdagi harf va u harf necha marta takrorlangani sonidan tashkil topgan object qaytarsin. MASALAN: countChars("hello") return {h: 1, e: 1, l: 2, o: 1}.
+*/
+function countChars(str) {
+    const result = {};
+    for (const char of str) {
+        result[char] = (result[char] || 0) + 1;
+    }
+    return result;
+}
+console.log(countChars("mississippi")); // { m: 1, i: 4, s: 4, p: 2 }
+console.log(countChars("jeonju")); // { j: 2, e: 1, o: 1, n: 1, u: 1 }

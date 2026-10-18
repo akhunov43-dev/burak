@@ -55,11 +55,10 @@ restaurantController.processSignup = async (
     newMember.memberType = MemberType.RESTAURANT;
     const result = await memberService.processSignup(newMember);
 
-    //req.session.member = result;
+    req.session.member = result;
     req.session.save(function() {
       res.redirect("/admin/product/all");
     });
-    res.send(result);
   } catch (err) {
     console.log("Error, getSignup:", err);
     const message = 
