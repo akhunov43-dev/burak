@@ -22,7 +22,7 @@ routerAdmin.get("/check-me", restaurant_controller_1.default.checkAuthSession);
 routerAdmin.get("/product/all", restaurant_controller_1.default.verifyRestaurant, product_controller_1.default.getAllProducts);
 routerAdmin.post("/product/create", restaurant_controller_1.default.verifyRestaurant, 
 // uploadProductImage.single("productImage"),
-(0, uploader_1.default)("products").array("productImages", 3), product_controller_1.default.createNewProduct);
+(0, uploader_1.default)("products").array("productImages", 5), product_controller_1.default.createNewProduct);
 routerAdmin.post("/product/:id", restaurant_controller_1.default.verifyRestaurant, product_controller_1.default.updateChosenProduct);
 /** User */
 routerAdmin.get("/user/all", restaurant_controller_1.default.verifyRestaurant, restaurant_controller_1.default.getUsers);
